@@ -1,71 +1,28 @@
-# comment-gpt README
+# Comment-gpt
 
-This is the README for your extension "comment-gpt". After writing up a brief description, we recommend including the following sections.
+Comment-gpt is an open source Visual Studio Code (VSCode) extension developed by Open Up - India. It uses GPT-3 APIs to automatically parse code and add JSDoc comments to it.
 
 ## Features
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+- Automatically detects important functions, classes, and interfaces in JavaScript and TypeScript files.
+- Adds proper JSDoc comments explaining the work of each function, class, or interface.
+- Supports both JavaScript and TypeScript files.
 
-For example if there is an image subfolder under your extension project workspace:
+## Installation
 
-\!\[feature X\]\(images/feature-x.png\)
+1. Install Visual Studio Code 1.38.0 or higher
+2. Launch VSCode
+3. From the command palette `Ctrl`-`Shift`-`P` (Windows, Linux) or `Cmd`-`Shift`-`P` (macOS), select `Extensions: Install Extension`.
+4. Search for `Comment-gpt` and install it.
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+## Usage
 
-## Requirements
+Once installed, you can use Comment-gpt to automatically add JSDoc comments to your JavaScript and TypeScript files. To do this, simply open a file and press `Ctrl`-`Shift`-`C` (Windows, Linux) or `Cmd`-`Shift`-`C` (macOS). This will trigger the Comment-gpt extension and it will automatically detect important functions, classes, and interfaces and add JSDoc comments to them.
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+## Contributing
 
-## Extension Settings
+We welcome contributions to Comment-gpt! Please read our [contributing guidelines](CONTRIBUTING.md) for more information on how to get involved.
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
+## License
 
-For example:
-
-This extension contributes the following settings:
-
-* `myExtension.enable`: Enable/disable this extension.
-* `myExtension.thing`: Set to `blah` to do something.
-
-## Known Issues
-
-Calling out known issues can help limit users opening duplicate issues against your extension.
-
-## Release Notes
-
-Users appreciate release notes as you update your extension.
-
-### 1.0.0
-
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
-
----
-
-## Following extension guidelines
-
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
-
-* [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
-
-## Working with Markdown
-
-You can author your README using Visual Studio Code. Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux).
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux).
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets.
-
-## For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+Comment-gpt is released under the [MIT License](LICENSE).
