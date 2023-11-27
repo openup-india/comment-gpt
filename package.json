@@ -18,11 +18,16 @@
       {
         "command": "comment-gpt.startCommentGPT",
         "title": "Start Comment GPT"
+      },
+      {
+        "command": "comment-gpt.generateCommentsForFile",
+        "title": "Generate JSDocs Comments for this file"
       }
     ]
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",
+    "playground": "npm run compile && node ./out/playground.js",
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./",
     "pretest": "npm run compile && npm run lint",

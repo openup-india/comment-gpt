@@ -1,4 +1,4 @@
-const { askGPT3dot5 } = require('./gpt')
+import { askGPT3dot5 } from './gpt'
 
 const generatePrompt = (code: string): string => {
   return (
@@ -8,6 +8,6 @@ const generatePrompt = (code: string): string => {
 
 // Exported Functions
 
-exports.getCommentFromCode = (code: string): string => {
+export const getCommentFromCode = async (code: string): Promise<string> => {
   return askGPT3dot5(generatePrompt(code))
 }

@@ -1,17 +1,43 @@
-import { parse, Node, SourceLocation, Position } from 'acorn'
-import { CodeSnippet } from '../types'
-const allowedTypes = ['FunctionDeclaration', 'ClassDeclaration']
+import { parse, Node } from 'acorn'
+import {
+  CodeSnippet,
+  FunctionDeclarationNode,
+  VariableDeclarationNode,
+} from '../types'
+
+const allowedRoles = ['Function', 'Class']
+
 export function jsparser(code: string): CodeSnippet[] {
   const ast = parse(code, { ecmaVersion: 'latest', locations: true }) as Node
   const nodesInfo: CodeSnippet[] = []
 
   if (ast.type === 'Program') {
-    const programNode = ast as Node & { body: Node[] }
+    const programNode = ast as Node & {
+      body: Node[]
+    }
     const body = programNode.body
 
     for (let node of body) {
       let { type, start, end, loc } = node
-      console.debug(node)
+      let id = '',
+        role = ''
+
+      if (type === 'FunctionDeclaration') {
+        id = (node as FunctionDeclarationNode).id.name
+        role = 'Function'
+      } else if (type === 'VariableDeclaration') {
+        const variableDeclarationNode = node as VariableDeclarationNode
+        const declarations = variableDeclarationNode.declarations
+        if (declarations.length > 0) {
+          const variableDeclaratorNode = declarations[0]
+          const initNode = variableDeclaratorNode.init
+          if (initNode?.type === 'ArrowFunctionExpression') {
+            id = variableDeclaratorNode.id?.name ?? ''
+            role = 'Function'
+          }
+        }
+      }
+
       const nodeCode = code.slice(start, end)
 
       const startPosition = {
@@ -20,30 +46,12 @@ export function jsparser(code: string): CodeSnippet[] {
       }
 
       const endPosition = { line: loc?.end.line, column: loc?.end.column }
-      let id = ''
-      if (type === 'VariableDeclaration') {
-        const variableDeclarationNode = node as Node & {
-          declarations: Node[]
-        }
-        const declarations = variableDeclarationNode.declarations
-        if (declarations.length > 0) {
-          const variableDeclaratorNode = declarations[0] as Node & {
-            init?: Node
-            id?: Node & { name: string }
-          }
-          const initNode = variableDeclaratorNode.init
-          console.debug(variableDeclaratorNode.id)
-          id = variableDeclaratorNode.id?.name ?? 'random' // id not in Function Decl. , improve types and expected return value
-          if (initNode?.type === 'ArrowFunctionExpression') {
-            type = 'FunctionDeclaration'
-          }
-        }
-      }
 
-      if (allowedTypes.includes(type)) {
+      if (allowedRoles.includes(role)) {
         nodesInfo.push({
           id,
           type,
+          role,
           code: nodeCode,
           startPosition,
           endPosition,

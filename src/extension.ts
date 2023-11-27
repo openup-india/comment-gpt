@@ -2,7 +2,6 @@
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode'
 import { jsparser } from './parser/javascript.parser'
-import { CodeSnippet } from './types'
 
 // This method is called when your extension is activated
 // Your extension is activated the very first time the command is executed
@@ -10,7 +9,7 @@ export function activate(context: vscode.ExtensionContext) {
   // console.log("Comment GPT started");
   vscode.commands.executeCommand('comment-gpt.startCommentGPT')
 
-  let disposable = vscode.commands.registerCommand(
+  const initCommand = vscode.commands.registerCommand(
     'comment-gpt.startCommentGPT',
     () => {
       vscode.window.showInformationMessage('Comment GPT is Running')
@@ -26,10 +25,18 @@ export function activate(context: vscode.ExtensionContext) {
     },
   )
 
-  context.subscriptions.push(disposable)
-}
+  const generateCommentsForFileCommand = vscode.commands.registerCommand(
+    'comment-gpt.generateCommentsForFile',
+    () => {
+      vscode.window.showInformationMessage(
+        'Processing File and Generating Comments',
+      )
+      // Todo: Read Current File -> Parse JS -> Generate Comments -> Update Comments in File -> Notify "Done"
+    },
+  )
 
-const onSnippetAdd = (snippet: CodeSnippet) => {}
+  context.subscriptions.push(initCommand, generateCommentsForFileCommand)
+}
 
 // This method is called when your extension is deactivated
 export function deactivate() {}
