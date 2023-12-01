@@ -4,14 +4,15 @@ export interface CodeSnippet {
   id: string
   type: string
   role: string
+  comment?: string
   code: string
   startPosition: {
-    line: number | undefined
-    column: number | undefined
+    line: number
+    column: number
   }
   endPosition: {
-    line: number | undefined
-    column: number | undefined
+    line: number
+    column: number
   }
 }
 

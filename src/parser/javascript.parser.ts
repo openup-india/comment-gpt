@@ -40,12 +40,17 @@ export function jsparser(code: string): CodeSnippet[] {
 
       const nodeCode = code.slice(start, end)
 
+      // This 1 case should never be executed ideally
       const startPosition = {
-        line: loc?.start.line,
-        column: loc?.start.column,
+        line: loc ? loc.start.line - 1 : 0, // Line number starts with 1
+        column: loc?.start.column ?? 0, // Col starts with 0
       }
 
-      const endPosition = { line: loc?.end.line, column: loc?.end.column }
+      // This 1 case should never be executed ideally
+      const endPosition = {
+        line: loc ? loc.end.line - 1 : 0,
+        column: loc?.end.column ?? 0,
+      }
 
       if (allowedRoles.includes(role)) {
         nodesInfo.push({
